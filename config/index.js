@@ -1,4 +1,5 @@
 import { defineConfig } from '@tarojs/cli'
+import path from 'path'
 
 import devConfig from './dev'
 import prodConfig from './prod'
@@ -9,6 +10,9 @@ export default defineConfig(async (merge, { command, mode }) => {
     projectName: 'timeSequence',
     date: '2025-11-19',
     designWidth: 375,
+    alias: {
+      '@': path.resolve(__dirname, '..', 'src')
+    },
     deviceRatio: {
       640: 2.34 / 2,
       750: 1,

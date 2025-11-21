@@ -1,0 +1,12 @@
+/* 导入全局样式 */
+@use './styles/variables.scss' as *;
+@use './styles/mixins.scss' as *;
+@use './styles/common.scss';
+
+/* 全局样式 */
+page {
+  background-color: $bg-body;
+  font-size: $font-size-base;
+  color: $text-main;
+  line-height: 1.5;
+}

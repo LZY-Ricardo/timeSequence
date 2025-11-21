@@ -59,6 +59,9 @@ importers:
       '@tarojs/taro':
         specifier: 4.1.8
         version: 4.1.8(@tarojs/components@4.1.8(@tarojs/helper@4.1.8)(@types/react@18.3.27)(postcss@8.5.6)(rollup@3.29.5))(@tarojs/helper@4.1.8)(@tarojs/shared@4.1.8)(@types/react@18.3.27)(postcss@8.5.6)(rollup@3.29.5)
+      lunar-javascript:
+        specifier: ^1.7.7
+        version: 1.7.7
       react:
         specifier: ^18.0.0
         version: 18.3.1
@@ -72,6 +75,12 @@ importers:
       '@babel/plugin-proposal-class-properties':
         specifier: 7.14.5
         version: 7.14.5(@babel/core@7.28.5)
+      '@babel/plugin-proposal-decorators':
+        specifier: ^7.28.0
+        version: 7.28.0(@babel/core@7.28.5)
+      '@babel/plugin-syntax-decorators':
+        specifier: ^7.27.1
+        version: 7.27.1(@babel/core@7.28.5)
       '@babel/preset-react':
         specifier: ^7.24.1
         version: 7.28.5(@babel/core@7.28.5)
@@ -3788,6 +3797,9 @@ packages:
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
+
+  lunar-javascript@1.7.7:
+    resolution: {integrity: sha512-u/KYiwPIBo/0bT+WWfU7qO1d+aqeB90Tuy4ErXenr2Gam0QcWeezUvtiOIyXR7HbVnW2I1DKfU0NBvzMZhbVQw==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -9342,6 +9354,8 @@ snapshots:
   lru-cache@6.0.0:
     dependencies:
       yallist: 4.0.0
+
+  lunar-javascript@1.7.7: {}
 
   magic-string@0.30.21:
     dependencies:

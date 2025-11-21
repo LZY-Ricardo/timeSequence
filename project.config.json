@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "timeSequence",
 	"description": "微信小程序项目Time Sequence ",
-	"appid": "touristappid",
+	"appid": "wxf4b275ddbe2a0d3d",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,

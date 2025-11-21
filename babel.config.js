@@ -5,11 +5,12 @@ module.exports = {
     ['taro',
       {
         framework: 'react',
-        ts: 'false',
+        ts: false,
         compiler: 'vite',
       }]
   ],
   plugins: [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
     [
       "import",
       {

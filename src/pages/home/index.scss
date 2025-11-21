@@ -1,0 +1,25 @@
+@use '../../styles/variables.scss' as *;
+@use '../../styles/mixins.scss' as *;
+
+.home-page {
+  min-height: 100vh;
+  background-color: $bg-body;
+  
+  .temp-header {
+    @include flex-center;
+    flex-direction: column;
+    padding: 120rpx 32rpx;
+    
+    .title {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $primary;
+      margin-bottom: 16rpx;
+    }
+    
+    .subtitle {
+      font-size: $font-size-base;
+      color: $text-sub;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+@use './variables.scss' as *;
+@use './mixins.scss' as *;
+
+/* 全局重置 */
+* {
+  box-sizing: border-box;
+}
+
+page {
+  background-color: $bg-body;
+  font-size: $font-size-base;
+  color: $text-main;
+  line-height: 1.5;
+}
+
+/* 通用按钮样式 */
+.btn {
+  padding: 24rpx 48rpx;
+  border-radius: $border-radius-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  transition: $transition-fast;
+  border: none;
+  
+  &.btn-primary {
+    background: $primary;
+    color: #fff;
+  }
+  
+  &.btn-secondary {
+    background: $bg-card;
+    color: $primary;
+    border: 2rpx solid $primary;
+  }
+  
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+/* 通用卡片样式 */
+.card {
+  @include card;
+}
+
+/* 空状态样式 */
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  padding: 120rpx 32rpx;
+  
+  .empty-icon {
+    font-size: 96rpx;
+    margin-bottom: 24rpx;
+  }
+  
+  .empty-text {
+    font-size: $font-size-base;
+    color: $text-sub;
+  }
+}
+
+/* 加载状态 */
+.loading-state {
+  @include flex-center;
+  padding: 120rpx 32rpx;
+  font-size: $font-size-base;
+  color: $text-sub;
+}
