@@ -1,0 +1,10 @@
+{
+  "projectName": "TimeSequence",
+  "specsDirectory": "specs",
+  "templatesDirectory": ".specify/templates",
+  "scriptsDirectory": ".specify/scripts",
+  "defaultBranch": "main",
+  "featureNamingPattern": "{number}-{short-name}",
+  "specFileName": "spec.md",
+  "checklistsDirectory": "checklists"
+}
