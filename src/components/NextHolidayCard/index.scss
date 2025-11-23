@@ -1,0 +1,141 @@
+@import '@/styles/variables.scss';
+
+.next-holiday-card {
+    margin: 0 32rpx 24rpx;
+    padding: 32rpx;
+    position: relative;
+    overflow: hidden;
+
+    // 倾斜渐变背景（左上到右下）
+    background: linear-gradient(135deg, #FF8A65 0%, #FF7043 50%, #F4511E 100%);
+
+    border-radius: $border-radius-base;
+
+    // 增强阴影效果，增加厚度感
+    box-shadow: 0 4rpx 12rpx rgba(255, 112, 67, 0.3),
+        0 8rpx 24rpx rgba(255, 112, 67, 0.15);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24rpx;
+    transition: all 0.3s ease;
+
+    // 添加极淡的边框增强立体感
+    border: 1rpx solid rgba(255, 255, 255, 0.2);
+
+    // 内部高光层（伪元素实现光泽效果）
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(255, 255, 255, 0) 100%);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    // 微妙的噪点纹理（使用渐变模拟）
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+            radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 138, 101, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    &:active {
+        transform: scale(0.98);
+        box-shadow: 0 2rpx 8rpx rgba(255, 112, 67, 0.3),
+            0 4rpx 16rpx rgba(255, 112, 67, 0.15);
+    }
+
+    .card-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12rpx;
+        position: relative;
+        z-index: 2;
+
+        .holiday-title {
+            display: flex;
+            flex-direction: column;
+            gap: 8rpx;
+
+            .label {
+                font-size: $font-size-xs;
+                color: rgba(255, 255, 255, 0.85);
+                font-weight: $font-weight-normal;
+                text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+            }
+
+            .name {
+                font-size: $font-size-xl;
+                color: #FFFFFF;
+                font-weight: $font-weight-bold;
+                text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        .date-range {
+            font-size: $font-size-sm;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: $font-weight-medium;
+            text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+        }
+
+        .note {
+            font-size: $font-size-xs;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+            margin-top: 4rpx;
+            text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .card-right {
+        flex-shrink: 0;
+        position: relative;
+        z-index: 2;
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: $border-radius-small;
+            padding: 24rpx 32rpx;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4rpx;
+            min-width: 120rpx;
+
+            // 倒数框也添加轻微阴影增强立体感
+            box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1),
+                inset 0 1rpx 0 rgba(255, 255, 255, 0.5);
+
+            .countdown-number {
+                font-size: 56rpx;
+                color: $accent;
+                font-weight: $font-weight-bold;
+                line-height: 1;
+            }
+
+            .countdown-unit {
+                font-size: $font-size-sm;
+                color: $text-sub;
+                font-weight: $font-weight-medium;
+            }
+        }
+    }
+}

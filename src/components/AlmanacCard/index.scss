@@ -1,0 +1,109 @@
+@import '@/styles/variables.scss';
+
+.almanac-card {
+    margin: -80rpx 32rpx 24rpx;
+    padding: 32rpx;
+    background: $bg-card;
+    border-radius: $border-radius-base;
+    box-shadow: $shadow-card;
+    position: relative;
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24rpx;
+
+        .title {
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+            color: $text-main;
+        }
+
+        .detail-btn {
+            color: $primary;
+            font-size: $font-size-sm;
+            padding: 8rpx 16rpx;
+            transition: $transition-fast;
+
+            &:active {
+                opacity: 0.7;
+                transform: scale(0.95);
+            }
+        }
+    }
+
+    .suit-avoid-section {
+        margin-bottom: 32rpx;
+
+        &:last-of-type {
+            margin-bottom: 24rpx;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16rpx;
+
+            .dot {
+                width: 12rpx;
+                height: 12rpx;
+                border-radius: 50%;
+                margin-right: 8rpx;
+            }
+
+            .label-text {
+                font-size: $font-size-base;
+                font-weight: $font-weight-medium;
+                color: $text-main;
+            }
+        }
+
+        .pills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16rpx;
+
+            .pill {
+                padding: 12rpx 24rpx;
+                border-radius: 32rpx;
+                font-size: $font-size-sm;
+                transition: $transition-fast;
+
+                &:active {
+                    transform: scale(0.95);
+                }
+            }
+        }
+
+        &.suit {
+            .dot {
+                background: $primary;
+            }
+
+            .pill {
+                background: $primary-light;
+                color: $primary;
+            }
+        }
+
+        &.avoid {
+            .dot {
+                background: $accent;
+            }
+
+            .pill {
+                background: $accent-light;
+                color: $accent;
+            }
+        }
+    }
+
+    .ganzhi-info {
+        text-align: center;
+        color: $text-sub;
+        font-size: $font-size-sm;
+        padding-top: 24rpx;
+        border-top: 2rpx solid #F0F0F0;
+    }
+}

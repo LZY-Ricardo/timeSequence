@@ -1,0 +1,170 @@
+@import '@/styles/variables.scss';
+
+.header {
+  background: $gradient-primary;
+  position: relative;
+  padding-bottom: 120rpx;
+
+  .header-safe-area {
+    height: $safe-area-top;
+    width: 100%;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40rpx 32rpx 60rpx;
+
+    .date-switch {
+      display: flex;
+      align-items: center;
+      gap: 8rpx;
+      padding: 12rpx 20rpx;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 32rpx;
+      color: #FFFFFF;
+      font-size: $font-size-sm;
+      transition: all 0.2s ease;
+
+      &:active {
+        background: rgba(255, 255, 255, 0.95);
+        color: $primary;
+        transform: scale(0.92);
+        animation: button-press 0.6s ease;
+      }
+
+      .icon {
+        font-size: 32rpx;
+        font-weight: $font-weight-bold;
+      }
+
+      .label {
+        font-weight: $font-weight-medium;
+      }
+    }
+
+    .date-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12rpx;
+      position: relative;
+
+      .date-main {
+        display: flex;
+        align-items: baseline;
+        gap: 8rpx;
+        color: #FFFFFF;
+
+        .year {
+          font-size: $font-size-base;
+          font-weight: $font-weight-medium;
+        }
+
+        .month {
+          font-size: $font-size-lg;
+          font-weight: $font-weight-medium;
+        }
+
+        .day {
+          font-size: $font-size-huge;
+          font-weight: $font-weight-bold;
+          line-height: 88rpx;
+        }
+      }
+
+      .date-sub {
+        display: flex;
+        align-items: center;
+        gap: 12rpx;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: $font-size-sm;
+
+        .weekday,
+        .lunar {
+          font-weight: $font-weight-normal;
+        }
+
+        .divider {
+          opacity: 0.6;
+        }
+      }
+
+      .today-btn {
+        position: absolute;
+        bottom: -70rpx;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 56rpx;
+        height: 56rpx;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFFFFF;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        transition: all 0.2s ease;
+        opacity: 0;
+        animation: fadeIn 0.3s ease forwards;
+
+        &:active {
+          background: rgba(255, 255, 255, 0.95);
+          color: $primary;
+          transform: translateX(-50%) scale(0.9);
+          animation: button-press-today 0.6s ease;
+        }
+      }
+    }
+  }
+}
+
+@keyframes button-press {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(0.88);
+  }
+
+  60% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(0.92);
+  }
+}
+
+@keyframes button-press-today {
+  0% {
+    transform: translateX(-50%) scale(1);
+  }
+
+  30% {
+    transform: translateX(-50%) scale(0.88);
+  }
+
+  60% {
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(0.9);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10rpx);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

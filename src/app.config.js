@@ -29,34 +29,33 @@ export default defineAppConfig({
     list: [
       {
         pagePath: 'pages/home/index',
-        text: '首页'
-        // TODO: 添加图标后取消注释
-        // iconPath: 'assets/icons/home.png',
-        // selectedIconPath: 'assets/icons/home-active.png'
+        text: '首页',
+        iconPath: 'assets/icons/home.png',
+        selectedIconPath: 'assets/icons/home-active.png'
       },
       {
         pagePath: 'pages/calendar/index',
-        text: '月历'
-        // iconPath: 'assets/icons/calendar.png',
-        // selectedIconPath: 'assets/icons/calendar-active.png'
+        text: '月历',
+        iconPath: 'assets/icons/calendar.png',
+        selectedIconPath: 'assets/icons/calendar-active.png'
       },
       {
         pagePath: 'pages/countdown/index',
-        text: '日程'
-        // iconPath: 'assets/icons/countdown.png',
-        // selectedIconPath: 'assets/icons/countdown-active.png'
+        text: '日程',
+        iconPath: 'assets/icons/countdown.png',
+        selectedIconPath: 'assets/icons/countdown-active.png'
       },
       {
         pagePath: 'pages/holiday/index',
-        text: '节假日'
-        // iconPath: 'assets/icons/holiday.png',
-        // selectedIconPath: 'assets/icons/holiday-active.png'
+        text: '节假日',
+        iconPath: 'assets/icons/holiday.png',
+        selectedIconPath: 'assets/icons/holiday-active.png'
       },
       {
         pagePath: 'pages/almanac/index',
-        text: '黄历'
-        // iconPath: 'assets/icons/almanac.png',
-        // selectedIconPath: 'assets/icons/almanac-active.png'
+        text: '黄历',
+        iconPath: 'assets/icons/almanac.png',
+        selectedIconPath: 'assets/icons/almanac-active.png'
       }
     ]
   }

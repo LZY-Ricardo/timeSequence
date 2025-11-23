@@ -1,6 +1,4 @@
-/**
- * 黄历相关API服务
- */
+import { getAlmanacData as getMockData } from '@/mock/almanacData'
 
 /**
  * 获取黄历数据
@@ -8,14 +6,9 @@
  * @returns {Promise<Object>} 黄历数据
  */
 export const getAlmanacData = async (dateStr) => {
-  // TODO: 后续实现真实API调用或使用Mock数据
-  console.log('获取黄历数据:', dateStr)
-  return {
-    date: dateStr,
-    lunar: '待实现',
-    yi: [],
-    ji: []
-  }
+  // 生产环境替换为真实API
+  // return Taro.request({ url: `/api/almanac?date=${dateStr}` })
+  return getMockData(dateStr)
 }
 
 /**
@@ -24,7 +17,5 @@ export const getAlmanacData = async (dateStr) => {
  * @returns {Promise<Object>} 黄历详情数据
  */
 export const getAlmanacDetail = async (dateStr) => {
-  // TODO: 后续实现真实API调用或使用Mock数据
-  console.log('获取黄历详情:', dateStr)
-  return getAlmanacData(dateStr)
+  return getMockData(dateStr)
 }
