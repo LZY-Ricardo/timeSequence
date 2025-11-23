@@ -1,3 +1,5 @@
+import { Lunar, Solar } from 'lunar-javascript'
+
 // 黄历Mock数据
 export const almanacMockData = {
     '2025-11-23': {
@@ -58,15 +60,33 @@ const generateDefaultAlmanacData = (dateStr) => {
         randomJi.push(jiList[Math.floor(Math.random() * jiList.length)])
     }
 
+    // 使用lunar-javascript计算真实的干支信息
+    const [year, month, day] = dateStr.split('-').map(Number)
+    const solar = Solar.fromYmd(year, month, day)
+    const lunar = solar.getLunar()
+
+    // 获取干支信息
+    const yearGanZhi = lunar.getYearInGanZhi()
+    const monthGanZhi = lunar.getMonthInGanZhi()
+    const dayGanZhi = lunar.getDayInGanZhi()
+
+    // 获取农历信息
+    const lunarMonth = lunar.getMonthInChinese()
+    const lunarDay = lunar.getDayInChinese()
+
+    // 获取星期信息
+    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+    const weekday = weekdays[solar.getWeek()]
+
     return {
         date: dateStr,
-        lunar: '待计算',
-        lunarYear: '乙巳年',
-        weekday: '待计算',
-        ganzhi: '待计算',
-        yearPillar: '乙巳',
-        monthPillar: '丁亥',
-        dayPillar: '甲午',
+        lunar: `${lunarMonth}${lunarDay}`,
+        lunarYear: `${yearGanZhi}年`,
+        weekday: weekday,
+        ganzhi: `${yearGanZhi}年 ${monthGanZhi}月 ${dayGanZhi}日`,
+        yearPillar: yearGanZhi,
+        monthPillar: monthGanZhi,
+        dayPillar: dayGanZhi,
         yi: randomYi,
         ji: randomJi,
         score: Math.floor(Math.random() * 100),
@@ -74,13 +94,13 @@ const generateDefaultAlmanacData = (dateStr) => {
         jiShen: '月德 四相 普护',
         xiongSha: '冲鼠 九空',
         taiShen: '占门碓 房内北',
-        naYin: '沙中金',
-        chongSha: '冲鼠煞北',
-        caiShen: '东北',
-        xiShen: '东北',
-        fuShen: '东南',
-        yangGui: '西南',
-        yinGui: '东北',
-        pengZu: '甲不开仓财物耗散 午不苫盖屋主更张'
+        naYin: lunar.getDayNaYin(),
+        chongSha: `冲${lunar.getDayChongDesc()}`,
+        caiShen: lunar.getDayPositionCai(),
+        xiShen: lunar.getDayPositionXi(),
+        fuShen: lunar.getDayPositionFu(),
+        yangGui: lunar.getDayPositionYangGui(),
+        yinGui: lunar.getDayPositionYinGui(),
+        pengZu: `${lunar.getPengZuGan()} ${lunar.getPengZuZhi()}`
     }
 }

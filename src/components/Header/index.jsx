@@ -53,7 +53,10 @@ const Header = ({ date, onDateChange, onDateClick }) => {
                         <Text className="lunar">{lunarText}</Text>
                     </View>
                     {!isToday && (
-                        <View className="today-btn" onClick={() => onDateChange && onDateChange('today')}>
+                        <View className="today-btn" onClick={(e) => {
+                            e.stopPropagation()
+                            onDateChange && onDateChange('today')
+                        }}>
                             <Text>今</Text>
                         </View>
                     )}
