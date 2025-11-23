@@ -1,6 +1,7 @@
 import { View, Text } from '@tarojs/components'
 import { formatDate, getWeekDay } from '@/utils/date'
 import { solarToLunar } from '@/utils/lunar'
+import { getGreeting } from '@/utils/greeting'
 import './index.scss'
 
 const Header = ({ date, onDateChange }) => {
@@ -15,6 +16,9 @@ const Header = ({ date, onDateChange }) => {
     const lunarInfo = solarToLunar(formatDate(date))
     const lunarText = `${lunarInfo.year} ${lunarInfo.month}${lunarInfo.day}`
 
+    // 获取问候语
+    const greeting = getGreeting()
+
     // 判断是否为今天
     const today = new Date()
     const isToday = currentDate.getFullYear() === today.getFullYear() &&
@@ -24,9 +28,16 @@ const Header = ({ date, onDateChange }) => {
     return (
         <View className="header">
             <View className="header-safe-area"></View>
+
+            {/* 问候语区域 */}
+            <View className="greeting-section">
+                <Text className="greeting-text">{greeting.text}</Text>
+                <Text className="greeting-emoji">{greeting.emoji}</Text>
+            </View>
+
             <View className="header-content">
                 <View className="date-switch" onClick={() => onDateChange && onDateChange('prev')}>
-                    <Text className="icon">‹</Text>
+                    <Text className="arrow">◀</Text>
                     <Text className="label">昨天</Text>
                 </View>
 
@@ -50,7 +61,7 @@ const Header = ({ date, onDateChange }) => {
 
                 <View className="date-switch" onClick={() => onDateChange && onDateChange('next')}>
                     <Text className="label">明天</Text>
-                    <Text className="icon">›</Text>
+                    <Text className="arrow">▶</Text>
                 </View>
             </View>
         </View>

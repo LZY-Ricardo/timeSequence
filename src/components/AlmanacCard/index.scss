@@ -1,4 +1,5 @@
 @import '@/styles/variables.scss';
+@import '@/styles/animations.scss';
 
 .almanac-card {
     margin: -80rpx 32rpx 24rpx;
@@ -7,6 +8,9 @@
     border-radius: $border-radius-base;
     box-shadow: $shadow-card;
     position: relative;
+
+    // 添加淡入上滑动画
+    animation: fadeInUp 0.5s ease-out 0.1s both;
 
     .card-header {
         display: flex;
@@ -25,6 +29,9 @@
             font-size: $font-size-sm;
             padding: 8rpx 16rpx;
             transition: $transition-fast;
+            display: flex;
+            align-items: center;
+            gap: 4rpx;
 
             &:active {
                 opacity: 0.7;

@@ -1,10 +1,14 @@
 @import '@/styles/variables.scss';
+@import '@/styles/animations.scss';
 
 .next-holiday-card {
     margin: 0 32rpx 24rpx;
     padding: 32rpx;
     position: relative;
     overflow: hidden;
+
+    // 添加淡入上滑动画，延迟稍长以产生错落效果
+    animation: fadeInUp 0.5s ease-out 0.2s both;
 
     // 倾斜渐变背景（左上到右下）
     background: linear-gradient(135deg, #FF8A65 0%, #FF7043 50%, #F4511E 100%);
@@ -79,6 +83,17 @@
                 color: rgba(255, 255, 255, 0.85);
                 font-weight: $font-weight-normal;
                 text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+            }
+
+            .name-with-icon {
+                display: flex;
+                align-items: center;
+                gap: 12rpx;
+            }
+
+            .holiday-icon {
+                font-size: 40rpx;
+                line-height: 1;
             }
 
             .name {

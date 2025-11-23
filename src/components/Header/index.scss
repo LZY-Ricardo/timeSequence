@@ -1,4 +1,5 @@
 @import '@/styles/variables.scss';
+@import '@/styles/animations.scss';
 
 .header {
   background: $gradient-primary;
@@ -8,6 +9,25 @@
   .header-safe-area {
     height: $safe-area-top;
     width: 100%;
+  }
+
+  .greeting-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12rpx;
+    padding: 16rpx 0;
+    animation: fadeIn 0.5s ease-out;
+
+    .greeting-text {
+      font-size: $font-size-sm;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: $font-weight-medium;
+    }
+
+    .greeting-emoji {
+      font-size: 24rpx;
+    }
   }
 
   .header-content {
@@ -34,9 +54,9 @@
         animation: button-press 0.6s ease;
       }
 
-      .icon {
-        font-size: 32rpx;
-        font-weight: $font-weight-bold;
+      .arrow {
+        font-size: 20rpx;
+        line-height: 1;
       }
 
       .label {
@@ -154,17 +174,5 @@
 
   100% {
     transform: translateX(-50%) scale(0.9);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-10rpx);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
   }
 }

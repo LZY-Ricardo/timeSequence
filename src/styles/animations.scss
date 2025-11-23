@@ -1,0 +1,64 @@
+// 全局动画定义
+
+// 淡入上滑动画
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40rpx);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// 纯淡入动画
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+// 缩放淡入动画
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// 从左滑入
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40rpx);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+// 从右滑入
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40rpx);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
