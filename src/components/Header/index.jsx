@@ -4,7 +4,7 @@ import { solarToLunar } from '@/utils/lunar'
 import { getGreeting } from '@/utils/greeting'
 import './index.scss'
 
-const Header = ({ date, onDateChange }) => {
+const Header = ({ date, onDateChange, onDateClick }) => {
     // 格式化日期
     const currentDate = new Date(date)
     const year = currentDate.getFullYear()
@@ -41,7 +41,7 @@ const Header = ({ date, onDateChange }) => {
                     <Text className="label">昨天</Text>
                 </View>
 
-                <View className="date-display">
+                <View className="date-display" onClick={() => onDateClick && onDateClick()}>
                     <View className="date-main">
                         <Text className="year">{year}年</Text>
                         <Text className="month">{month}月</Text>

@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components'
 import { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
+import { DatePicker } from '@nutui/nutui-react-taro'
 import Header from '@/components/Header'
 import AlmanacCard from '@/components/AlmanacCard'
 import NextHolidayCard from '@/components/NextHolidayCard'
@@ -14,6 +15,7 @@ const Home = () => {
   const [almanacData, setAlmanacData] = useState(null)
   const [nextHoliday, setNextHoliday] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [showDatePicker, setShowDatePicker] = useState(false)
 
   useEffect(() => {
     loadData()
@@ -68,11 +70,27 @@ const Home = () => {
     })
   }
 
+  const handleDateClick = () => {
+    setShowDatePicker(true)
+  }
+
+  const handleDatePickerConfirm = (options, values) => {
+    const [year, month, day] = values
+    const newDate = new Date(year, month - 1, day)
+    setCurrentDate(newDate)
+    setShowDatePicker(false)
+  }
+
+  const handleDatePickerCancel = () => {
+    setShowDatePicker(false)
+  }
+
   return (
     <View className="home-page">
       <Header
         date={currentDate}
         onDateChange={handleDateChange}
+        onDateClick={handleDateClick}
       />
 
       {almanacData && (
@@ -85,6 +103,15 @@ const Home = () => {
       {nextHoliday && (
         <NextHolidayCard data={nextHoliday} />
       )}
+
+      <DatePicker
+        visible={showDatePicker}
+        title="选择日期"
+        type="date"
+        defaultValue={currentDate}
+        onConfirm={handleDatePickerConfirm}
+        onClose={handleDatePickerCancel}
+      />
     </View>
   )
 }
