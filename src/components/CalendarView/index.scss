@@ -1,0 +1,149 @@
+@import '@/styles/variables.scss';
+
+.calendar-view {
+    background: $bg-card;
+    border-radius: $border-radius-base;
+    padding: 24rpx;
+    box-shadow: $shadow-card;
+    margin: 24rpx;
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24rpx;
+
+        .month-switch {
+            padding: 12rpx 24rpx;
+
+            .icon {
+                font-size: 40rpx;
+                color: $text-sub;
+            }
+        }
+
+        .month-display {
+            text-align: center;
+
+            .month {
+                font-size: $font-size-xl;
+                font-weight: $font-weight-bold;
+                color: $text-main;
+                margin-right: 12rpx;
+            }
+
+            .year {
+                font-size: $font-size-base;
+                color: $text-sub;
+            }
+        }
+    }
+
+    .back-today-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12rpx 0;
+        margin-bottom: 24rpx;
+        background: $primary-light;
+        border-radius: $border-radius-small;
+
+        text {
+            font-size: $font-size-sm;
+            color: $primary;
+            font-weight: $font-weight-medium;
+        }
+    }
+
+    .calendar-weekdays {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 16rpx;
+
+        .weekday {
+            width: 14.28%;
+            text-align: center;
+            font-size: $font-size-sm;
+            color: $text-sub;
+        }
+    }
+
+    .calendar-grid {
+        .calendar-week {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 12rpx;
+        }
+
+        .calendar-day {
+            width: 14.28%;
+            height: 90rpx;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12rpx;
+            position: relative;
+
+            .day-number {
+                font-size: $font-size-lg;
+                font-weight: $font-weight-medium;
+                color: $text-main;
+                margin-bottom: 4rpx;
+            }
+
+            .day-lunar {
+                font-size: 20rpx;
+                color: $text-sub;
+            }
+
+            &.other-month {
+
+                .day-number,
+                .day-lunar {
+                    color: $text-disabled;
+                }
+            }
+
+            &.today {
+                .day-number {
+                    color: $primary;
+                    font-weight: $font-weight-bold;
+                }
+
+                .day-lunar {
+                    color: $primary;
+                }
+            }
+
+            &.selected {
+                background: $primary;
+                box-shadow: 0 4rpx 12rpx rgba($primary, 0.3);
+
+                .day-number,
+                .day-lunar {
+                    color: #FFFFFF;
+                }
+            }
+
+            .holiday-tag {
+                position: absolute;
+                top: 4rpx;
+                right: 4rpx;
+                font-size: 16rpx;
+                padding: 2rpx 6rpx;
+                border-radius: 4rpx;
+
+                &.rest {
+                    background: $accent-light;
+                    color: $accent;
+                }
+
+                &.work {
+                    background: #ECEFF1;
+                    color: $text-sub;
+                }
+            }
+        }
+    }
+}
