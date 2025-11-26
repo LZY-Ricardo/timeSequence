@@ -25,13 +25,13 @@ const Countdown = () => {
 
   const handleAdd = () => {
     Taro.navigateTo({
-      url: '/pages/countdown/add/index'
+      url: '/packageCountdown/add/index'
     })
   }
 
   const handleEdit = (event) => {
     Taro.navigateTo({
-      url: `/pages/countdown/add/index?id=${event.id}`
+      url: `/packageCountdown/add/index?id=${event.id}`
     })
   }
 
