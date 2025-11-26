@@ -1,0 +1,41 @@
+@import '@/styles/variables.scss';
+
+.filter-tabs {
+    display: flex;
+    align-items: center;
+    padding: 24rpx 32rpx;
+    background: transparent; // Transparent to blend with page bg if needed, or white
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    /* Hide scrollbar */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12rpx 32rpx;
+        margin-right: 20rpx;
+        border-radius: 32rpx;
+        background: #FFFFFF;
+        color: $text-sub;
+        font-size: $font-size-sm;
+        transition: all 0.3s ease;
+        flex-shrink: 0; // Prevent shrinking
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &.active {
+            background: #673AB7; // Purple as requested
+            color: #FFFFFF;
+            font-weight: $font-weight-medium;
+            box-shadow: 0 4rpx 12rpx rgba(103, 58, 183, 0.3);
+        }
+    }
+}

@@ -1,25 +1,64 @@
-@use '../../styles/variables.scss' as *;
-@use '../../styles/mixins.scss' as *;
+@import '@/styles/variables.scss';
 
 .countdown-page {
   min-height: 100vh;
-  background-color: $bg-body;
-  
-  .temp-content {
-    @include flex-center;
+  background: $bg-body;
+  padding-bottom: 120rpx; // Space for FAB
+
+  .empty-state {
+    display: flex;
     flex-direction: column;
-    padding: 120rpx 32rpx;
-    
-    .title {
-      font-size: $font-size-xl;
-      font-weight: $font-weight-bold;
-      color: $primary;
-      margin-bottom: 16rpx;
+    align-items: center;
+    justify-content: center;
+    padding-top: 200rpx;
+
+    .empty-icon {
+      font-size: 96rpx;
+      margin-bottom: 32rpx;
     }
-    
-    .subtitle {
+
+    .empty-text {
       font-size: $font-size-base;
       color: $text-sub;
+      margin-bottom: 48rpx;
+    }
+
+    .add-btn-bottom {
+      background: $primary;
+      color: #fff;
+      padding: 0 64rpx;
+      border-radius: 48rpx;
+      font-size: $font-size-base;
+    }
+  }
+
+  .event-list {
+    padding: 0 32rpx;
+  }
+
+  .fab-button {
+    position: fixed;
+    right: 48rpx;
+    bottom: 48rpx; // Adjust based on tabbar height if needed
+    width: 112rpx;
+    height: 112rpx;
+    border-radius: 50%;
+    background: $primary;
+    box-shadow: 0 8rpx 24rpx rgba(0, 137, 123, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+
+    .icon {
+      color: #fff;
+      font-size: 64rpx;
+      line-height: 1;
+      margin-top: -8rpx; // Visual adjustment
+    }
+
+    &:active {
+      transform: scale(0.95);
     }
   }
 }
