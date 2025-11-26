@@ -10,7 +10,7 @@
     // 添加淡入上滑动画，延迟稍长以产生错落效果
     animation: fadeInUp 0.5s ease-out 0.2s both;
 
-    // 倾斜渐变背景（左上到右下）
+    // 默认背景（橙色系）
     background: linear-gradient(135deg, #FF8A65 0%, #FF7043 50%, #F4511E 100%);
 
     border-radius: $border-radius-base;
@@ -53,7 +53,7 @@
         bottom: 0;
         background-image:
             radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(255, 138, 101, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
             radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
         pointer-events: none;
         z-index: 0;
@@ -61,8 +61,6 @@
 
     &:active {
         transform: scale(0.98);
-        box-shadow: 0 2rpx 8rpx rgba(255, 112, 67, 0.3),
-            0 4rpx 16rpx rgba(255, 112, 67, 0.15);
     }
 
     .card-left {
@@ -150,6 +148,231 @@
                 font-size: $font-size-sm;
                 color: $text-sub;
                 font-weight: $font-weight-medium;
+            }
+        }
+    }
+
+    // --- 主题样式 ---
+
+    // 1. 喜庆主题 (Festive) - 丹灿云霞 (Dan Can Yun Xia)
+    &.theme-festive {
+        // 朱砂红渐变 (Vermilion Red) - 深沉、正统
+        background: linear-gradient(135deg, #D32F2F 0%, #C62828 40%, #8E0000 100%);
+
+        // 阴影：深重、华贵
+        box-shadow: 0 6rpx 16rpx rgba(142, 0, 0, 0.4),
+            0 12rpx 32rpx rgba(142, 0, 0, 0.25);
+
+        // 边框：赤金 (Red Gold)，带金属光泽
+        border: 1rpx solid rgba(255, 215, 0, 0.4);
+
+        // 背景纹理：祥云纹 / 海水江崖 (暗纹刻印)
+        &::after {
+            background-image:
+                // 祥云意象 (金色微光)
+                radial-gradient(circle at 90% 10%, rgba(255, 215, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 10% 90%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
+                // 暗纹 (模拟织锦/刻印质感)
+                repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 10rpx, rgba(0, 0, 0, 0.03) 11rpx, transparent 12rpx);
+            opacity: 0.8;
+        }
+
+        .card-left {
+            .holiday-title {
+                .label {
+                    color: rgba(255, 236, 179, 0.9); // 浅金米色
+                    text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.2);
+                }
+
+                .name {
+                    color: #FFD700; // 赤金
+                    // 浮雕金字效果
+                    text-shadow: 0 2rpx 0 rgba(142, 0, 0, 0.5),
+                        0 4rpx 8rpx rgba(0, 0, 0, 0.3);
+                }
+            }
+
+            .date-range {
+                color: rgba(255, 255, 255, 0.95);
+            }
+
+            .note {
+                color: rgba(255, 255, 255, 0.85);
+            }
+        }
+
+        .card-right {
+            .countdown-box {
+                // 金石篆刻风格
+                // 背景：比背景稍亮的朱砂红，模拟印泥
+                background: linear-gradient(135deg, #E53935 0%, #D32F2F 100%);
+
+                // 边框：金色双线边框 (通过 box-shadow 模拟)
+                // 1. 外圈金边 2. 内圈深红间隔 3. 内圈金线
+                border: 2rpx solid #FFD700;
+                box-shadow:
+                    inset 0 0 0 2rpx #8E0000, // 深红间隔
+                    inset 0 0 0 4rpx #FFD700, // 内金线
+                    0 4rpx 12rpx rgba(0, 0, 0, 0.3); // 外部立体阴影
+
+                .countdown-number {
+                    color: #FFD700; // 金字
+                    text-shadow: 0 1rpx 2rpx rgba(142, 0, 0, 0.6); // 深红衬底
+                }
+
+                .countdown-unit {
+                    color: rgba(255, 215, 0, 0.9); // 浅金
+                }
+
+                &:active {
+                    transform: scale(0.96);
+                }
+            }
+        }
+    }
+
+    // 2. 肃穆主题 (Solemn) - 清明 (烟雨青黛)
+    &.theme-solemn {
+        // 青黛色/水墨灰渐变 (Muted Indigo/Cyan Grey)
+        background: linear-gradient(135deg, #607D8B 0%, #546E7A 50%, #37474F 100%);
+
+        // 阴影改为冷色调，更内敛
+        box-shadow: 0 4rpx 12rpx rgba(38, 50, 56, 0.3),
+            0 8rpx 24rpx rgba(38, 50, 56, 0.2);
+
+        // 边框：哑光银灰，不发光
+        border: 1rpx solid rgba(207, 216, 220, 0.3);
+
+        // 背景纹理：模拟水墨晕染 + 细雨
+        &::after {
+            // 细雨效果 (使用重复线性渐变模拟)
+            background-image:
+                repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 11px),
+                radial-gradient(circle at 80% 20%, rgba(38, 50, 56, 0.4) 0%, transparent 60%), // 墨痕
+                radial-gradient(circle at 20% 80%, rgba(38, 50, 56, 0.3) 0%, transparent 50%); // 墨痕
+            opacity: 0.8;
+        }
+
+        // 内部高光层减弱，更哑光
+        &::before {
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.05) 0%,
+                    rgba(255, 255, 255, 0) 100%);
+        }
+
+        .card-left {
+            .holiday-title {
+                .label {
+                    color: rgba(236, 240, 241, 0.8); // 哑光银灰
+                    text-shadow: none; // 去掉发光阴影
+                }
+
+                .name {
+                    color: #ECEFF1; // 接近白色的灰
+                    text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3); // 深色硬阴影
+                    font-weight: $font-weight-bold;
+                }
+            }
+
+            .date-range {
+                color: rgba(236, 240, 241, 0.9);
+                text-shadow: none;
+            }
+
+            .note {
+                color: rgba(176, 190, 197, 0.9); // 浅蓝灰
+                text-shadow: none;
+            }
+        }
+
+        .card-right {
+            .countdown-box {
+                // 青石/古玉风格
+                background: rgba(236, 240, 241, 0.95); // 接近石头的灰白
+
+                // 边框：深灰色线条，像石碑
+                box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.2),
+                    inset 0 0 0 2rpx rgba(69, 90, 100, 0.5); // 墨绿色/深灰边框
+
+                .countdown-number {
+                    color: #37474F; // 墨色 (Charcoal Black)
+                    text-shadow: none;
+                }
+
+                .countdown-unit {
+                    color: #546E7A; // 深青灰
+                }
+            }
+        }
+    }
+
+    // 3. 雅致主题 (Elegant) - 端午、中秋、劳动等通用 (杏暖流光)
+    &.theme-elegant {
+        // 杏黄色/米金色 (Apricot Beige/Warm Cream)
+        background: linear-gradient(135deg, #FDF5E6 0%, #F5DEB3 50%, #E6CFA1 100%);
+
+        // 阴影：柔和的暖褐色
+        box-shadow: 0 4rpx 12rpx rgba(139, 69, 19, 0.15),
+            0 8rpx 24rpx rgba(139, 69, 19, 0.08);
+
+        // 边框：深古铜色细边，带包浆感
+        border: 1rpx solid rgba(101, 67, 33, 0.15);
+
+        // 背景纹理：洒金宣纸 / 隐约的云纹
+        &::after {
+            background-image:
+                // 洒金效果
+                radial-gradient(circle at 15% 25%, rgba(218, 165, 32, 0.4) 0%, transparent 2rpx),
+                radial-gradient(circle at 75% 65%, rgba(218, 165, 32, 0.3) 0%, transparent 3rpx),
+                radial-gradient(circle at 35% 85%, rgba(218, 165, 32, 0.3) 0%, transparent 2rpx),
+                // 隐约的云纹/回纹 (使用重复径向渐变模拟)
+                repeating-radial-gradient(circle at 50% 0%, transparent 0, transparent 20rpx, rgba(139, 69, 19, 0.03) 21rpx, transparent 22rpx);
+            opacity: 0.6;
+        }
+
+        .card-left {
+            .holiday-title {
+                .label {
+                    color: rgba(93, 64, 55, 0.7); // 茶褐色 (Dark Tea Brown)
+                    text-shadow: none;
+                }
+
+                .name {
+                    color: #4E342E; // 深茶色
+                    text-shadow: 0 1rpx 2rpx rgba(255, 255, 255, 0.5); // 浅色高光，模拟刻字凹陷或凸起
+                    font-weight: $font-weight-bold;
+                }
+            }
+
+            .date-range {
+                color: rgba(78, 52, 46, 0.85);
+                text-shadow: none;
+            }
+
+            .note {
+                color: rgba(93, 64, 55, 0.65);
+                text-shadow: none;
+            }
+        }
+
+        .card-right {
+            .countdown-box {
+                // 木刻/铜牌风格
+                background: rgba(255, 253, 240, 0.9); // 米白纸张色
+
+                // 边框：深褐色，温润包浆
+                box-shadow: 0 2rpx 8rpx rgba(62, 39, 35, 0.15),
+                    inset 0 0 0 2rpx rgba(101, 67, 33, 0.2); // 铜褐色内边框
+
+                .countdown-number {
+                    color: #5D4037; // 茶褐色
+                    // 尝试一点点内阴影增加刻痕感
+                    text-shadow: 0 1rpx 0 rgba(255, 255, 255, 0.5);
+                }
+
+                .countdown-unit {
+                    color: #8D6E63; // 浅褐色
+                }
             }
         }
     }
