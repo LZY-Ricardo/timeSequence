@@ -1,0 +1,73 @@
+@use "@/styles/variables.scss" as *;
+@use "@/styles/mixins.scss" as *;
+
+.next-countdown-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px $padding-page;
+  padding: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #FFFFFF;
+  border-radius: $border-radius-large;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  }
+
+  .card-left {
+    .countdown-title {
+      .label {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #FFFFFF;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: $font-size-sm;
+      }
+
+      .name-with-icon {
+        display: flex;
+        align-items: center;
+        margin-top: 12px;
+
+        .countdown-icon {
+          font-size: 24px;
+          margin-right: 8px;
+        }
+
+        .name {
+          font-size: $font-size-xl;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+
+    .target-date {
+      font-size: $font-size-base;
+      margin-top: 8px;
+      opacity: 0.8;
+    }
+  }
+
+  .card-right {
+    .countdown-box {
+      display: flex;
+      align-items: baseline;
+      text-align: right;
+
+      .countdown-number {
+        font-size: 48px;
+        font-weight: $font-weight-bold;
+        line-height: 1;
+      }
+
+      .countdown-unit {
+        font-size: $font-size-base;
+        margin-left: 6px;
+      }
+    }
+  }
+}

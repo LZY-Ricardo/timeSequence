@@ -5,15 +5,18 @@ import { DatePicker } from '@nutui/nutui-react-taro'
 import Header from '@/components/Header'
 import AlmanacCard from '@/components/AlmanacCard'
 import NextHolidayCard from '@/components/NextHolidayCard'
+import NextCountdownCard from '@/components/NextCountdownCard'
 import { formatDate } from '@/utils/date'
 import { getAlmanacData } from '@/services/almanac'
 import { getNextHoliday } from '@/services/holiday'
+import { getNextCountdownEvent } from '@/services/countdown'
 import './index.scss'
 
 const Home = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [almanacData, setAlmanacData] = useState(null)
   const [nextHoliday, setNextHoliday] = useState(null)
+  const [nextCountdown, setNextCountdown] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showDatePicker, setShowDatePicker] = useState(false)
 
@@ -27,18 +30,21 @@ const Home = () => {
       const dateStr = formatDate(currentDate)
 
       // 并行加载数据
-      const [almanac, holiday] = await Promise.all([
+      const [almanac, holiday, countdown] = await Promise.all([
         getAlmanacData(dateStr),
-        getNextHoliday()
+        getNextHoliday(),
+        getNextCountdownEvent()
       ])
 
       console.log('=== 数据加载完成 ===')
       console.log('almanac:', almanac)
       console.log('holiday:', holiday)
+      console.log('countdown:', countdown)
       console.log('==================')
 
       setAlmanacData(almanac)
       setNextHoliday(holiday)
+      setNextCountdown(countdown)
     } catch (error) {
       console.error('数据加载失败', error)
       Taro.showToast({
@@ -102,6 +108,10 @@ const Home = () => {
 
       {nextHoliday && (
         <NextHolidayCard data={nextHoliday} />
+      )}
+
+      {nextCountdown && (
+        <NextCountdownCard data={nextCountdown} />
       )}
 
       <DatePicker

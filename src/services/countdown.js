@@ -149,3 +149,39 @@ export const deleteCountdownEvent = async (id) => {
   events = events.filter(e => e.id != id)
   saveAllEvents(events)
 }
+
+
+/**
+ * 获取下一个即将到来的倒数日事件
+ */
+export const getNextCountdownEvent = async () => {
+  // 模拟异步
+  await new Promise(resolve => setTimeout(resolve, 100));
+
+  const events = getAllEvents();
+  const today = new Date();
+
+  const futureEvents = events
+    .map(event => {
+      const target = new Date(event.targetDate);
+      // 使用 UTC 日期进行比较，以避免时区问题
+      const utcToday = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+      const utcTarget = Date.UTC(target.getFullYear(), target.getMonth(), target.getDate());
+      const diff = (utcTarget - utcToday) / (1000 * 60 * 60 * 24);
+
+      return {
+        ...event,
+        daysLeft: diff,
+      };
+    })
+    .filter(event => event.daysLeft >= 0); // 只保留今天及未来的事件
+
+  if (futureEvents.length === 0) {
+    return null;
+  }
+
+  // 按天数升序排序，找到最近的一个
+  futureEvents.sort((a, b) => a.daysLeft - b.daysLeft);
+
+  return futureEvents[0];
+};
