@@ -9,21 +9,20 @@ const Almanac = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [almanacData, setAlmanacData] = useState(null)
 
+  useEffect(() => {
+    loadData(currentDate)
+  }, [currentDate])
+
   useDidShow(() => {
     // 检查是否有从日历页传来的日期
     const selectedDate = Taro.getStorageSync('selectedAlmanacDate')
     if (selectedDate) {
       setCurrentDate(new Date(selectedDate))
       Taro.removeStorageSync('selectedAlmanacDate') // 用完后清除
-    } else {
-      // 否则加载今天的数据
-      loadData(new Date())
     }
+    // 如果没有从日历页传来的日期，则不执行任何操作
+    // 以保持用户先前浏览的日期状态，避免每次进入都重置为今天
   })
-
-  useEffect(() => {
-    loadData(currentDate)
-  }, [currentDate])
 
   const loadData = async (date) => {
     const data = await getAlmanacDetail(formatDate(date))
@@ -43,9 +42,22 @@ const Almanac = () => {
     setCurrentDate(newDate)
   }
 
+  const getRatingInfo = (score) => {
+    const s = score || 50
+    if (s >= 75) {
+      return { text: '吉', className: 'rating-good' }
+    }
+    if (s <= 35) {
+      return { text: '凶', className: 'rating-bad' }
+    }
+    return { text: '平', className: 'rating-neutral' }
+  }
+
   if (!almanacData) {
     return <View className="almanac-page loading"><Text>加载中...</Text></View>
   }
+
+  const ratingInfo = getRatingInfo(almanacData.score)
 
   return (
     <View className="almanac-page">
@@ -97,13 +109,14 @@ const Almanac = () => {
       <View className="score-section">
         <View className="score-header">
           <Text>今日宜忌指数</Text>
-          <Text className="score-value">{almanacData.rating}</Text>
+          <Text className={`score-value ${ratingInfo.className}`}>{ratingInfo.text}</Text>
         </View>
         <View className="progress-bar">
           <View
             className="progress-fill"
             style={{ width: `${almanacData.score || 50}%` }}
           />
+          <Text className="progress-text">{`${almanacData.score || 50}%`}</Text>
         </View>
       </View>
 
