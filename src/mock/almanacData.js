@@ -80,7 +80,7 @@ const generateDefaultAlmanacData = (dateStr) => {
 
     return {
         date: dateStr,
-        lunar: `${lunarMonth}${lunarDay}`,
+        lunar: `${lunarMonth}月${lunarDay}`,
         lunarYear: `${yearGanZhi}年`,
         weekday: weekday,
         ganzhi: `${yearGanZhi}年 ${monthGanZhi}月 ${dayGanZhi}日`,

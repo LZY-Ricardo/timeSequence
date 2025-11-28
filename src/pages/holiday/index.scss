@@ -1,25 +1,56 @@
-@use '../../styles/variables.scss' as *;
-@use '../../styles/mixins.scss' as *;
+@import '@/styles/variables.scss';
 
 .holiday-page {
-  min-height: 100vh;
-  background-color: $bg-body;
-  
-  .temp-content {
-    @include flex-center;
-    flex-direction: column;
-    padding: 120rpx 32rpx;
-    
-    .title {
-      font-size: $font-size-xl;
+  padding-bottom: 60rpx;
+
+  .year-selector {
+    padding: 24rpx $padding-page;
+    background: $bg-card;
+    border-bottom: 2rpx solid #F0F0F0;
+
+    .year-display {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: $font-size-lg;
       font-weight: $font-weight-bold;
-      color: $primary;
-      margin-bottom: 16rpx;
+      color: $text-main;
+
+      .icon {
+        font-size: $font-size-sm;
+        color: $text-sub;
+      }
     }
-    
-    .subtitle {
-      font-size: $font-size-base;
-      color: $text-sub;
+  }
+
+  .timeline-section {
+    margin-top: 24rpx;
+    padding: 0 $padding-page;
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24rpx;
+
+      .icon {
+        font-size: $font-size-lg;
+        margin-right: 12rpx;
+      }
+
+      .title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $text-main;
+      }
     }
+  }
+
+  .footer-note {
+    margin-top: 48rpx;
+    padding: 0 $padding-page;
+    text-align: center;
+    font-size: $font-size-xs;
+    color: $text-disabled;
+    line-height: 1.5;
   }
 }

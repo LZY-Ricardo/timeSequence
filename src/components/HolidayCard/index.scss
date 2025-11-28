@@ -1,0 +1,129 @@
+@import '@/styles/variables.scss';
+
+.holiday-card-wrapper {
+  display: flex;
+  position: relative;
+
+  &.with-timeline {
+    padding-left: 60rpx;
+    margin-bottom: 24rpx;
+  }
+
+  .timeline {
+    position: absolute;
+    left: 20rpx;
+    top: 0;
+    bottom: 0;
+    width: 4rpx;
+
+    .timeline-dot {
+      position: absolute;
+      top: 28rpx;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20rpx;
+      height: 20rpx;
+      border-radius: 50%;
+      background: $accent-light;
+      border: 4rpx solid $accent;
+    }
+
+    .timeline-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2rpx;
+      height: 100%;
+      background: #E0E0E0;
+    }
+  }
+
+  .holiday-card {
+    flex: 1;
+    background: $bg-card;
+    border-radius: $border-radius-base;
+    padding: $padding-card;
+    box-shadow: $shadow-card;
+    transition: $transition-base;
+
+    &.passed {
+      opacity: 0.6;
+
+      .countdown-badge {
+        background: #F0F0F0;
+        color: $text-disabled;
+      }
+    }
+
+    .card-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .holiday-info {
+      .holiday-name {
+        display: block;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $text-main;
+        margin-bottom: 8rpx;
+      }
+
+      .date-range {
+        font-size: $font-size-sm;
+        color: $text-sub;
+      }
+    }
+
+    .countdown-badge {
+      display: flex;
+      align-items: baseline;
+      padding: 12rpx 20rpx;
+      border-radius: $border-radius-small;
+      background: $accent-light;
+      color: $accent;
+      font-weight: $font-weight-bold;
+
+      .countdown-value {
+        font-size: $font-size-xl;
+        line-height: 1;
+      }
+
+      .countdown-label {
+        font-size: $font-size-sm;
+        margin-left: 4rpx;
+      }
+    }
+
+    .card-detail {
+      margin-top: 24rpx;
+      padding-top: 24rpx;
+      border-top: 2rpx solid #F0F0F0;
+      display: flex;
+      align-items: flex-start;
+      color: $text-sub;
+      font-size: $font-size-sm;
+
+      .note-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28rpx;
+        height: 28rpx;
+        border-radius: 50%;
+        background: #E0E0E0;
+        color: #fff;
+        font-size: $font-size-xs;
+        margin-right: 12rpx;
+        font-style: italic;
+      }
+
+      .note-text {
+        flex: 1;
+        line-height: 1.5;
+      }
+    }
+  }
+}
