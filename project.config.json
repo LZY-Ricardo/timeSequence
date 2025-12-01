@@ -4,10 +4,10 @@
 	"description": "微信小程序项目Time Sequence ",
 	"appid": "wxf4b275ddbe2a0d3d",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
-    "enhance": false,
-    "compileHotReLoad": false,
+		"enhance": false,
+		"compileHotReLoad": false,
 		"postcss": false,
 		"preloadBackgroundData": false,
 		"minified": false,

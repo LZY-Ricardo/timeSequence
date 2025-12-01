@@ -63,6 +63,15 @@ export const holidayMockData = {
             daysCount: 7,
             note: '10月1日至7日放假调休，共7天',
             workDay: '9月28日（周日）、10月11日（周六）上班'
+        },
+        {
+            name: '元旦',
+            dateRange: '12月31日-2026年1月2日',
+            startDate: '2025-12-31',
+            endDate: '2026-01-02',
+            daysCount: 3,
+            note: '12月31日至2026年1月2日放假调休，共3天',
+            workDay: null
         }
     ],
     2026: [
