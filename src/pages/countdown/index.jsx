@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Taro, { useDidShow, usePullDownRefresh } from '@tarojs/taro'
 import FilterTabs from '@/components/FilterTabs'
 import EventCard from '@/components/EventCard'
-import { getCountdownEvents, deleteCountdownEvent } from '@/services/countdown'
+import { getCountdownEvents, deleteCountdownEvent, togglePinEvent } from '@/services/countdown'
 import './index.scss'
 
 const Countdown = () => {
@@ -72,6 +72,15 @@ const Countdown = () => {
     })
   }
 
+  const handlePin = async (event) => {
+    await togglePinEvent(event.id)
+    loadEvents()
+    Taro.showToast({
+      title: event.isPinned ? '已取消置顶' : '已置顶',
+      icon: 'success'
+    })
+  }
+
   return (
     <View className="countdown-page">
       <FilterTabs
@@ -95,6 +104,7 @@ const Countdown = () => {
               data={event}
               onEdit={handleEdit}
               onDelete={handleDelete}
+              onPin={handlePin}
             />
           ))}
         </View>

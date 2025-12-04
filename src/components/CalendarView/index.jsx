@@ -1,60 +1,34 @@
 import { View, Text } from '@tarojs/components'
 import { useState, useEffect } from 'react'
-import { getMonthCalendar, formatDate } from '@/utils/date'
+import { formatDate } from '@/utils/date'
 import { solarToLunar } from '@/utils/lunar'
-import { getHolidaysByYear } from '@/services/holiday'
+import { getCalendarWithEvents } from '@/services/calendar'
 import './index.scss'
 
 const CalendarView = ({ onDateSelect, selectedDate }) => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
     const [calendarData, setCalendarData] = useState([])
-    const [holidayMap, setHolidayMap] = useState({})
 
-    // Fetch holidays when year changes
+    // 加载日历数据
     useEffect(() => {
-        const fetchHolidays = async () => {
-            const { list } = await getHolidaysByYear(currentYear)
-            const map = {}
+        loadCalendarData()
+    }, [currentYear, currentMonth])
 
-            list.forEach(holiday => {
-                const start = new Date(holiday.startDate)
-                const end = new Date(holiday.endDate)
-
-                // Iterate from start to end date
-                for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-                    const dateStr = formatDate(d)
-                    map[dateStr] = {
-                        type: 'rest',
-                        tag: '休',
-                        name: holiday.name
-                    }
-                }
-            })
-            setHolidayMap(map)
-        }
-
-        fetchHolidays()
-    }, [currentYear])
-
-    useEffect(() => {
-        const data = getMonthCalendar(currentYear, currentMonth)
-        // Add lunar and holiday info
+    const loadCalendarData = async () => {
+        const data = await getCalendarWithEvents(currentYear, currentMonth)
+        // 添加农历信息
         const enrichedData = data.map(week =>
             week.map(dayInfo => {
                 const lunar = solarToLunar(dayInfo.date)
-                const dateStr = formatDate(dayInfo.date)
-                const holiday = holidayMap[dateStr]
-
                 return {
                     ...dayInfo,
-                    lunarDay: lunar.day, // e.g., '初一'
-                    holiday: holiday
+                    lunarDay: lunar.day // e.g., '初一'
                 }
             })
         )
         setCalendarData(enrichedData)
-    }, [currentYear, currentMonth, holidayMap])
+    }
 
     const handleDateClick = (dateInfo) => {
         onDateSelect && onDateSelect(dateInfo)
@@ -139,6 +113,13 @@ const CalendarView = ({ onDateSelect, selectedDate }) => {
                                 {dateInfo.holiday && (
                                     <View className={`holiday-tag ${dateInfo.holiday.type}`}>
                                         {dateInfo.holiday.tag}
+                                    </View>
+                                )}
+                                {dateInfo.hasEvents && (
+                                    <View className="event-dots">
+                                        {dateInfo.events.slice(0, 3).map((event, idx) => (
+                                            <View key={idx} className={`event-dot ${event.type}`} />
+                                        ))}
                                     </View>
                                 )}
                             </View>

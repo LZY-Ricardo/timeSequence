@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+import { getDaysDiff, getNextLoopDate } from '@/utils/date'
 
 const STORAGE_KEY = 'countdown_events'
 
@@ -71,13 +72,15 @@ export const getCountdownEvents = async (filterType = 'all') => {
     events = events.filter(event => event.type === filterType)
   }
 
-  // 计算倒数天数
+  // 计算倒数天数（考虑循环）
   const today = new Date()
   const eventsWithCountdown = events.map(event => {
-    const targetDate = new Date(event.targetDate)
-    const diff = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24))
+    const nextDate = getNextLoopDate(event.targetDate, event.loop)
+    const diff = Math.ceil((nextDate - today) / (1000 * 60 * 60 * 24))
+
     return {
       ...event,
+      nextDate: nextDate,
       daysLeft: diff,
       isPassed: diff < 0
     }
@@ -93,8 +96,6 @@ export const getCountdownEvents = async (filterType = 'all') => {
     if (!aPinned && bPinned) return 1
 
     // 绝对值比较，因为可能是负数（已过去）
-    // 如果想要已过去的沉底，可以调整逻辑
-    // 这里保持原逻辑：按距离今天的天数（绝对值）排序
     return Math.abs(a.daysLeft) - Math.abs(b.daysLeft)
   })
 
@@ -156,32 +157,51 @@ export const deleteCountdownEvent = async (id) => {
  */
 export const getNextCountdownEvent = async () => {
   // 模拟异步
-  await new Promise(resolve => setTimeout(resolve, 100));
+  await new Promise(resolve => setTimeout(resolve, 100))
 
-  const events = getAllEvents();
-  const today = new Date();
+  const events = getAllEvents()
+  const today = new Date()
 
   const futureEvents = events
     .map(event => {
-      const target = new Date(event.targetDate);
+      const nextDate = getNextLoopDate(event.targetDate, event.loop)
       // 使用 UTC 日期进行比较，以避免时区问题
-      const utcToday = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
-      const utcTarget = Date.UTC(target.getFullYear(), target.getMonth(), target.getDate());
-      const diff = (utcTarget - utcToday) / (1000 * 60 * 60 * 24);
+      const utcToday = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())
+      const utcTarget = Date.UTC(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate())
+      const diff = (utcTarget - utcToday) / (1000 * 60 * 60 * 24)
 
       return {
         ...event,
-        daysLeft: diff,
-      };
+        nextDate: nextDate,
+        daysLeft: diff
+      }
     })
-    .filter(event => event.daysLeft >= 0); // 只保留今天及未来的事件
+    .filter(event => event.daysLeft >= 0) // 只保留今天及未来的事件
 
   if (futureEvents.length === 0) {
-    return null;
+    return null
   }
 
   // 按天数升序排序，找到最近的一个
-  futureEvents.sort((a, b) => a.daysLeft - b.daysLeft);
+  futureEvents.sort((a, b) => a.daysLeft - b.daysLeft)
 
-  return futureEvents[0];
-};
+  return futureEvents[0]
+}
+
+/**
+ * 切换事件置顶状态
+ */
+export const togglePinEvent = async (eventId) => {
+  await new Promise(resolve => setTimeout(resolve, 100))
+
+  const events = getAllEvents()
+  const eventIndex = events.findIndex(e => e.id == eventId)
+
+  if (eventIndex !== -1) {
+    events[eventIndex].isPinned = !events[eventIndex].isPinned
+    saveAllEvents(events)
+    return events[eventIndex]
+  }
+
+  return null
+}

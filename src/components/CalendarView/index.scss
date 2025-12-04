@@ -144,6 +144,39 @@
                     color: $text-sub;
                 }
             }
+
+            .event-dots {
+                display: flex;
+                justify-content: center;
+                gap: 4rpx;
+                margin-top: 4rpx;
+                position: absolute;
+                bottom: 4rpx;
+                left: 50%;
+                transform: translateX(-50%);
+
+                .event-dot {
+                    width: 8rpx;
+                    height: 8rpx;
+                    border-radius: 50%;
+
+                    &.anniversary {
+                        background: #FF6B9D;
+                    }
+
+                    &.birthday {
+                        background: #FF7043;
+                    }
+
+                    &.countdown {
+                        background: #00897B;
+                    }
+
+                    &.other {
+                        background: #9E9E9E;
+                    }
+                }
+            }
         }
     }
 }

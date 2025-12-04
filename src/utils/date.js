@@ -6,7 +6,7 @@ export const formatDate = (date, format = 'YYYY-MM-DD') => {
   const year = d.getFullYear()
   const month = String(d.getMonth() + 1).padStart(2, '0')
   const day = String(d.getDate()).padStart(2, '0')
-  
+
   return format
     .replace('YYYY', year)
     .replace('MM', month)
@@ -33,21 +33,66 @@ export const getWeekDay = (date) => {
 }
 
 /**
+ * 获取循环日期的下一个日期
+ */
+export const getNextLoopDate = (targetDate, loopType) => {
+  const today = new Date()
+  const target = new Date(targetDate)
+
+  if (loopType === 'none') {
+    return target
+  }
+
+  let nextDate = new Date(target)
+
+  switch (loopType) {
+    case 'yearly':
+      nextDate.setFullYear(today.getFullYear())
+      if (nextDate < today) {
+        nextDate.setFullYear(today.getFullYear() + 1)
+      }
+      break
+
+    case 'halfYear':
+      while (nextDate < today) {
+        nextDate.setMonth(nextDate.getMonth() + 6)
+      }
+      break
+
+    case 'quarterly':
+      while (nextDate < today) {
+        nextDate.setMonth(nextDate.getMonth() + 3)
+      }
+      break
+
+    case 'monthly':
+      nextDate.setMonth(today.getMonth())
+      nextDate.setFullYear(today.getFullYear())
+      if (nextDate < today) {
+        nextDate.setMonth(nextDate.getMonth() + 1)
+      }
+      break
+  }
+
+  return nextDate
+}
+
+/**
  * 获取当前月份的日历数据（6行7列）
  */
 export const getMonthCalendar = (year, month) => {
   const firstDay = new Date(year, month, 1)
   const lastDay = new Date(year, month + 1, 0)
   const prevMonthLastDay = new Date(year, month, 0)
-  
+
   const firstDayWeek = firstDay.getDay()
   const daysInMonth = lastDay.getDate()
   const daysInPrevMonth = prevMonthLastDay.getDate()
-  
+
   const calendar = []
   let dayCount = 1
   let nextMonthDayCount = 1
-  
+
   // 生成6行7列的日历数据
   for (let i = 0; i < 6; i++) {
     const week = []
@@ -81,6 +126,6 @@ export const getMonthCalendar = (year, month) => {
     }
     calendar.push(week)
   }
-  
+
   return calendar
 }

@@ -1,85 +1,115 @@
 @import '@/styles/variables.scss';
 
 .nut-swipe {
-    margin-bottom: 24rpx;
-    border-radius: $border-radius-base;
-    overflow: hidden;
-    box-shadow: $shadow-card;
+  margin-bottom: 24rpx;
+  border-radius: $border-radius-base;
+  overflow: hidden;
+  box-shadow: $shadow-card;
+
+  // 左滑按钮容器样式
+  :global(.nut-swipe__right) {
+    display: flex;
+
+    // 按钮样式统一处理
+    :global(.nut-button) {
+      width: 140rpx; // 固定宽度，容纳最长文字
+      height: 100%; // 高度撑满
+      border-radius: 0; // 移除圆角
+      flex-shrink: 0;
+      margin: 0; // 移除按钮间隙
+      border: none; // 移除边框
+    }
+  }
 }
 
 .event-card {
+  display: flex;
+  background: #fff;
+  min-height: 160rpx;
+  position: relative;
+
+  .color-bar {
+    width: 12rpx;
+    background-color: $primary;
+    flex-shrink: 0;
+  }
+
+  .content {
+    flex: 1;
+    padding: 24rpx 32rpx;
     display: flex;
-    background: #fff;
-    min-height: 160rpx;
-    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
 
-    .color-bar {
-        width: 12rpx;
-        background-color: $primary;
-        flex-shrink: 0;
-    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16rpx;
 
-    .content {
+      .title-row {
         flex: 1;
-        padding: 24rpx 32rpx;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        align-items: center;
+        margin-right: 24rpx;
+      }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16rpx;
+      .title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $text-main;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-            .title {
-                font-size: $font-size-lg;
-                font-weight: $font-weight-bold;
-                color: $text-main;
-                flex: 1;
-                margin-right: 24rpx;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
+      .pin-badge {
+        margin-left: 12rpx;
+        padding: 4rpx 12rpx;
+        background: $accent-light;
+        color: $accent;
+        font-size: $font-size-xs;
+        border-radius: 8rpx;
+        flex-shrink: 0;
+      }
 
-            .days-wrapper {
-                display: flex;
-                align-items: baseline;
-                flex-shrink: 0;
+      .days-wrapper {
+        display: flex;
+        align-items: baseline;
+        flex-shrink: 0;
 
-                .days-label {
-                    font-size: $font-size-xs;
-                    color: $text-sub;
-                }
-
-                .days-number {
-                    font-size: 48rpx; // Larger number
-                    font-weight: $font-weight-bold;
-                    margin: 0 8rpx;
-                    line-height: 1;
-                }
-            }
+        .days-label {
+          font-size: $font-size-xs;
+          color: $text-sub;
         }
 
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .description {
-                font-size: $font-size-sm;
-                color: $text-sub;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 60%;
-            }
-
-            .date {
-                font-size: $font-size-xs;
-                color: $text-disabled;
-            }
+        .days-number {
+          font-size: 48rpx; // Larger number
+          font-weight: $font-weight-bold;
+          margin: 0 8rpx;
+          line-height: 1;
         }
+      }
     }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .description {
+        font-size: $font-size-sm;
+        color: $text-sub;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 60%;
+      }
+
+      .date {
+        font-size: $font-size-xs;
+        color: $text-disabled;
+      }
+    }
+  }
 }

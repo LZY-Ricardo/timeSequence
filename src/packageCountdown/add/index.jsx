@@ -2,6 +2,7 @@ import { View, Text, Input, Picker, Switch, Button } from '@tarojs/components'
 import { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { formatDate } from '@/utils/date'
+import { solarToLunar, lunarToSolar } from '@/utils/lunar'
 import { saveCountdownEvent, getCountdownEventById } from '@/services/countdown'
 import './index.scss'
 
@@ -15,6 +16,8 @@ const CountdownAdd = () => {
     isPinned: false,
     isLunar: false
   })
+
+  const [displayDate, setDisplayDate] = useState('')
 
   // Handle Edit Mode
   useEffect(() => {
@@ -34,6 +37,23 @@ const CountdownAdd = () => {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  // 更新显示日期
+  useEffect(() => {
+    if (formData.isLunar) {
+      const lunar = solarToLunar(formData.targetDate)
+      setDisplayDate(`农历 ${lunar.year}${lunar.month}${lunar.day}`)
+    } else {
+      setDisplayDate(`公历 ${formData.targetDate}`)
+    }
+  }, [formData.targetDate, formData.isLunar])
+
+  const handleDateTypeSwitch = (isLunar) => {
+    setFormData({
+      ...formData,
+      isLunar: isLunar
+    })
   }
 
   const handleSubmit = async () => {
@@ -76,6 +96,24 @@ const CountdownAdd = () => {
       </View>
 
       <View className="form-item">
+        <Text className="label">日历类型</Text>
+        <View className="radio-group date-type-switch">
+          <View
+            className={`radio-item ${!formData.isLunar ? 'active' : ''}`}
+            onClick={() => handleDateTypeSwitch(false)}
+          >
+            公历
+          </View>
+          <View
+            className={`radio-item ${formData.isLunar ? 'active' : ''}`}
+            onClick={() => handleDateTypeSwitch(true)}
+          >
+            农历
+          </View>
+        </View>
+      </View>
+
+      <View className="form-item">
         <Text className="label">日期</Text>
         <Picker
           mode="date"
@@ -83,7 +121,7 @@ const CountdownAdd = () => {
           onChange={(e) => setFormData({ ...formData, targetDate: e.detail.value })}
         >
           <View className="picker-value">
-            {formData.targetDate}
+            {displayDate}
           </View>
         </Picker>
       </View>

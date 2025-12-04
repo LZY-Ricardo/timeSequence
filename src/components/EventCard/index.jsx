@@ -2,32 +2,36 @@ import { View, Text } from '@tarojs/components'
 import { Swipe, Button } from '@nutui/nutui-react-taro'
 import './index.scss'
 
-const EventCard = ({ data, onEdit, onDelete }) => {
-    const { title, description, targetDate, color } = data
+const EventCard = ({ data, onEdit, onDelete, onPin }) => {
+    const { title, description, targetDate, color, isPinned, daysLeft } = data
 
-    // Calculate days difference
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    const target = new Date(targetDate)
-    target.setHours(0, 0, 0, 0)
-
-    const diffTime = target - today
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-    const isPast = diffDays < 0
-    const days = Math.abs(diffDays)
+    // 使用服务层计算好的天数
+    const isPast = daysLeft < 0
+    const days = Math.abs(daysLeft)
 
     const rightAction = (
-        <Button
-            type="danger"
-            shape="square"
-            onClick={(e) => {
-                e.stopPropagation()
-                onDelete && onDelete(data)
-            }}
-        >
-            删除
-        </Button>
+        <>
+            <Button
+                type="primary"
+                shape="square"
+                onClick={(e) => {
+                    e.stopPropagation()
+                    onPin && onPin(data)
+                }}
+            >
+                {isPinned ? '取消置顶' : '置顶'}
+            </Button>
+            <Button
+                type="danger"
+                shape="square"
+                onClick={(e) => {
+                    e.stopPropagation()
+                    onDelete && onDelete(data)
+                }}
+            >
+                删除
+            </Button>
+        </>
     )
 
     return (
@@ -43,7 +47,10 @@ const EventCard = ({ data, onEdit, onDelete }) => {
 
                 <View className="content">
                     <View className="header">
-                        <Text className="title">{title}</Text>
+                        <View className="title-row">
+                            <Text className="title">{title}</Text>
+                            {isPinned && <View className="pin-badge">置顶</View>}
+                        </View>
                         <View className="days-wrapper">
                             <Text className="days-label">{isPast ? '已过' : '还有'}</Text>
                             <Text className="days-number" style={{ color: color || '#00897B' }}>{days}</Text>
