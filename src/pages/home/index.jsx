@@ -1,11 +1,12 @@
 import { View } from '@tarojs/components'
 import { useState, useEffect } from 'react'
-import Taro from '@tarojs/taro'
+import Taro, { usePullDownRefresh } from '@tarojs/taro'
 import { DatePicker } from '@nutui/nutui-react-taro'
 import Header from '@/components/Header'
 import AlmanacCard from '@/components/AlmanacCard'
 import NextHolidayCard from '@/components/NextHolidayCard'
 import NextCountdownCard from '@/components/NextCountdownCard'
+import Skeleton from '@/components/Skeleton'
 import { formatDate } from '@/utils/date'
 import { getAlmanacData } from '@/services/almanac'
 import { getNextHoliday } from '@/services/holiday'
@@ -23,6 +24,33 @@ const Home = () => {
   useEffect(() => {
     loadData()
   }, [currentDate])
+
+  // 下拉刷新
+  usePullDownRefresh(async () => {
+    console.log('下拉刷新触发')
+
+    try {
+      // 清除缓存
+      const dateStr = formatDate(currentDate)
+      await Taro.removeStorage({ key: `almanac_${dateStr}` }).catch(() => {})
+      await Taro.removeStorage({ key: 'holiday_next' }).catch(() => {})
+      await Taro.removeStorage({ key: 'countdown_next' }).catch(() => {})
+    } catch (error) {
+      console.error('清除缓存失败:', error)
+    }
+
+    // 重新加载数据
+    await loadData()
+
+    // 停止下拉刷新
+    Taro.stopPullDownRefresh()
+
+    Taro.showToast({
+      title: '刷新成功',
+      icon: 'success',
+      duration: 1500
+    })
+  })
 
   const loadData = async () => {
     try {
@@ -99,19 +127,25 @@ const Home = () => {
         onDateClick={handleDateClick}
       />
 
-      {almanacData && (
-        <AlmanacCard
-          data={almanacData}
-          onViewDetail={handleViewDetail}
-        />
-      )}
+      {loading ? (
+        <Skeleton count={3} />
+      ) : (
+        <>
+          {almanacData && (
+            <AlmanacCard
+              data={almanacData}
+              onViewDetail={handleViewDetail}
+            />
+          )}
 
-      {nextHoliday && (
-        <NextHolidayCard data={nextHoliday} />
-      )}
+          {nextHoliday && (
+            <NextHolidayCard data={nextHoliday} />
+          )}
 
-      {nextCountdown && (
-        <NextCountdownCard data={nextCountdown} />
+          {nextCountdown && (
+            <NextCountdownCard data={nextCountdown} />
+          )}
+        </>
       )}
 
       <DatePicker

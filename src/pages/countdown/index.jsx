@@ -1,6 +1,6 @@
 import { View, Text, Button } from '@tarojs/components'
 import { useState, useEffect } from 'react'
-import Taro, { useDidShow } from '@tarojs/taro'
+import Taro, { useDidShow, usePullDownRefresh } from '@tarojs/taro'
 import FilterTabs from '@/components/FilterTabs'
 import EventCard from '@/components/EventCard'
 import { getCountdownEvents, deleteCountdownEvent } from '@/services/countdown'
@@ -17,6 +17,29 @@ const Countdown = () => {
   useEffect(() => {
     loadEvents()
   }, [filterType])
+
+  // 下拉刷新
+  usePullDownRefresh(async () => {
+    console.log('日程页面下拉刷新')
+
+    try {
+      // 清除缓存
+      await Taro.removeStorage({ key: 'countdown_events' }).catch(() => {})
+      await Taro.removeStorage({ key: 'countdown_next' }).catch(() => {})
+    } catch (error) {
+      console.error('清除缓存失败:', error)
+    }
+
+    // 重新加载数据
+    await loadEvents()
+
+    Taro.stopPullDownRefresh()
+    Taro.showToast({
+      title: '刷新成功',
+      icon: 'success',
+      duration: 1500
+    })
+  })
 
   const loadEvents = async () => {
     const data = await getCountdownEvents(filterType)

@@ -43,6 +43,11 @@ const transformAlmanacData = (apiData) => {
     return match ? match[1] : ''
   }
 
+  const yiList = fitness ? fitness.split('.') : []
+  const jiList = taboo ? taboo.split('.') : []
+  
+  const score = Math.min(100, Math.max(0, 50 + (yiList.length * 5) - (jiList.length * 3)))
+
   // 转换为应用数据格式
   return {
     date: gregoriandate,
@@ -54,9 +59,9 @@ const transformAlmanacData = (apiData) => {
     monthPillar: tiangandizhimonth,
     dayPillar: tiangandizhiday,
     constellation: '', // API不返回星座
-    yi: fitness ? fitness.split('.') : [],
-    ji: taboo ? taboo.split('.') : [],
-    score: 0, // API不返回分数
+    yi: yiList,
+    ji: jiList,
+    score,
     rating: '平',
     jiShen: shenwei || '',
     xiongSha: `${chongsha} ${suisha}`,

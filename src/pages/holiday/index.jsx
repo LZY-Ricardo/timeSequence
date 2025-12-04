@@ -1,5 +1,6 @@
 import { View, Text } from '@tarojs/components'
 import { useState, useEffect } from 'react'
+import Taro, { usePullDownRefresh } from '@tarojs/taro'
 import { Picker } from '@nutui/nutui-react-taro'
 import NextHolidayCard from '@/components/NextHolidayCard'
 import HolidayCard from '@/components/HolidayCard'
@@ -18,6 +19,29 @@ const Holiday = () => {
   useEffect(() => {
     loadHolidays()
   }, [currentYear])
+
+  // 下拉刷新
+  usePullDownRefresh(async () => {
+    console.log('节假日页面下拉刷新')
+
+    try {
+      // 清除缓存
+      await Taro.removeStorage({ key: `holiday_${currentYear}` }).catch(() => {})
+      await Taro.removeStorage({ key: 'holiday_next' }).catch(() => {})
+    } catch (error) {
+      console.error('清除缓存失败:', error)
+    }
+
+    // 重新加载数据
+    await loadHolidays()
+
+    Taro.stopPullDownRefresh()
+    Taro.showToast({
+      title: '刷新成功',
+      icon: 'success',
+      duration: 1500
+    })
+  })
 
   const loadHolidays = async () => {
     const data = await getHolidaysByYear(currentYear)

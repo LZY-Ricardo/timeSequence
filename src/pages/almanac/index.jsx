@@ -1,6 +1,6 @@
 import { View, Text } from '@tarojs/components'
 import { useState, useEffect } from 'react'
-import Taro, { useDidShow } from '@tarojs/taro'
+import Taro, { useDidShow, usePullDownRefresh } from '@tarojs/taro'
 import { formatDate, getWeekDay } from '@/utils/date'
 import { getAlmanacDetail } from '@/services/almanac'
 import './index.scss'
@@ -22,6 +22,29 @@ const Almanac = () => {
     }
     // 如果没有从日历页传来的日期，则不执行任何操作
     // 以保持用户先前浏览的日期状态，避免每次进入都重置为今天
+  })
+
+  // 下拉刷新
+  usePullDownRefresh(async () => {
+    console.log('黄历页面下拉刷新')
+
+    try {
+      // 清除当前日期的缓存
+      const dateStr = formatDate(currentDate)
+      await Taro.removeStorage({ key: `almanac_${dateStr}` }).catch(() => {})
+    } catch (error) {
+      console.error('清除缓存失败:', error)
+    }
+
+    // 重新加载数据
+    await loadData(currentDate)
+
+    Taro.stopPullDownRefresh()
+    Taro.showToast({
+      title: '刷新成功',
+      icon: 'success',
+      duration: 1500
+    })
   })
 
   const loadData = async (date) => {
