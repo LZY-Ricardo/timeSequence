@@ -12,8 +12,9 @@ const EventCard = ({ data, onEdit, onDelete, onPin }) => {
     const rightAction = (
         <>
             <Button
-                type="primary"
+                type={isPinned ? 'warning' : 'success'}
                 shape="square"
+                style={{ width: '180rpx', minWidth: '180rpx', maxWidth: '180rpx' }}
                 onClick={(e) => {
                     e.stopPropagation()
                     onPin && onPin(data)
@@ -24,6 +25,7 @@ const EventCard = ({ data, onEdit, onDelete, onPin }) => {
             <Button
                 type="danger"
                 shape="square"
+                style={{ width: '140rpx', minWidth: '140rpx', maxWidth: '140rpx' }}
                 onClick={(e) => {
                     e.stopPropagation()
                     onDelete && onDelete(data)

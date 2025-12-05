@@ -12,12 +12,36 @@
 
     // 按钮样式统一处理
     :global(.nut-button) {
-      width: 140rpx; // 固定宽度，容纳最长文字
-      height: 100%; // 高度撑满
-      border-radius: 0; // 移除圆角
-      flex-shrink: 0;
-      margin: 0; // 移除按钮间隙
-      border: none; // 移除边框
+      height: 100% !important; // 高度撑满
+      border-radius: 0 !important; // 移除圆角
+      flex-shrink: 0 !important;
+      margin: 0 !important; // 移除按钮间隙
+      border: none !important; // 移除边框
+      min-width: 0 !important; // 重置最小宽度
+      max-width: none !important; // 移除最大宽度限制
+      padding: 0 !important; // 移除内边距，完全由宽度控制
+
+      // 按钮内部文字容器
+      :global(.nut-button__text) {
+        width: 100% !important;
+        text-align: center !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+      }
+
+      // 置顶/取消置顶按钮（第一个按钮）
+      &:nth-child(1) {
+        width: 180rpx !important; // 固定宽度，容纳"取消置顶"4个字
+        flex-basis: 180rpx !important;
+        flex-grow: 0 !important;
+      }
+
+      // 删除按钮（第二个按钮）
+      &:nth-child(2) {
+        width: 140rpx !important; // 固定宽度，容纳"删除"2个字
+        flex-basis: 140rpx !important;
+        flex-grow: 0 !important;
+      }
     }
   }
 }
