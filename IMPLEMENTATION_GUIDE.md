@@ -64,21 +64,21 @@ pnpm run dev:weapp
 
 **验证点：**
 - [ ] API 请求成功（控制台查看日志）
-- [ ] 数据格式正确转换
-- [ ] 宜忌信息显示完整
+- [x] 数据格式正确转换
+- [x] 宜忌信息显示完整
 
 #### 2.2 缓存机制测试
 
 **验证点：**
-- [ ] 首次请求调用 API
-- [ ] 24 小时内使用缓存
-- [ ] 缓存数据格式正确
+- [x] 首次请求调用 API
+- [x] 24 小时内使用缓存
+- [x] 缓存数据格式正确
 
 #### 2.3 离线降级测试
 
 **验证点：**
-- [ ] 网络错误时使用 Mock 数据
-- [ ] 页面仍能正常显示
+- [x] 网络错误时使用 Mock 数据
+- [x] 页面仍能正常显示
 
 ---
 
@@ -94,15 +94,15 @@ pnpm run dev:weapp
 
 #### 3.2 开发环境配置
 
-确认 `project.config.json` 中 `urlCheck` 设置为 `false`（开发环境）
+确认 `project.config.json` 中 `urlCheck` 设置为 `false`（开发环境）——已配置
 
 ---
 
 ## 阶段二：用户体验优化
 
-### 步骤 4：加载状态优化
+### 步骤 4：加载状态优化（已完成）
 
-#### 4.1 创建 Loading 组件
+#### 4.1 创建 Loading 组件（已完成）
 
 **新建：`src/components/Loading/index.jsx`**
 
@@ -155,7 +155,7 @@ export default Loading
 }
 ```
 
-#### 4.2 创建骨架屏组件
+#### 4.2 创建骨架屏组件（已完成）
 
 **新建：`src/components/Skeleton/index.jsx`**
 
@@ -190,7 +190,7 @@ const Skeleton = ({ type = 'card', count = 1 }) => {
 export default Skeleton
 ```
 
-#### 4.3 在首页集成加载状态
+#### 4.3 在首页集成加载状态（已完成）
 
 **修改：`src/pages/home/index.jsx`**
 
@@ -229,9 +229,9 @@ const Home = () => {
 
 ---
 
-### 步骤 5：交互体验增强
+### 步骤 5：交互体验增强（已完成）
 
-#### 5.1 实现下拉刷新
+#### 5.1 实现下拉刷新（已完成）
 
 **修改：`src/pages/home/index.config.js`**
 
@@ -264,7 +264,7 @@ const Home = () => {
 }
 ```
 
-#### 5.2 优化按钮点击反馈
+#### 5.2 优化按钮点击反馈（已完成）
 
 **修改：`src/styles/common.scss`**
 
@@ -283,9 +283,9 @@ const Home = () => {
 
 ## 阶段三：功能完善
 
-### 步骤 7：倒数日功能增强
+### 步骤 7：倒数日功能增强（已完成）
 
-#### 7.1 实现置顶功能
+#### 7.1 实现置顶功能（已完成）
 
 **修改：`src/services/countdown.js`**
 
@@ -329,7 +329,7 @@ export const togglePinEvent = async (eventId) => {
 }
 ```
 
-#### 7.2 实现循环周期计算
+#### 7.2 实现循环周期计算（已完成）
 
 **修改：`src/utils/date.js`**
 
@@ -409,7 +409,7 @@ export const getCountdownEvents = async (filterType = 'all') => {
 }
 ```
 
-#### 7.3 农历日期支持
+#### 7.3 农历日期支持（已完成）
 
 **修改：`src/packageCountdown/add/index.jsx`**
 
@@ -480,7 +480,7 @@ const CountdownAdd = () => {
 
 ---
 
-### 步骤 8：日历功能增强
+### 步骤 8：日历功能增强（已完成）
 
 #### 8.1 在日历中标记倒数日事件
 
